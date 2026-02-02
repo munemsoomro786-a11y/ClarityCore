@@ -232,10 +232,11 @@ with st.sidebar:
     )
     
     if uploaded_file is not None:
+    # This line MUST be indented by 4 spaces
     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    
+    # All following lines must also be indented the same amount
     img = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
-    # Every line that should only happen IF a file is uploaded must be aligned here
-
 # Check if the image has transparency (4 channels)
 if img.shape[2] == 4:
     st.write("✅ Transparency detected and preserved.")
