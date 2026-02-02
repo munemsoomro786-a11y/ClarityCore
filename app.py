@@ -241,20 +241,19 @@ with st.sidebar:
 # Check if the image has transparency (4 channels)
 if img.shape[2] == 4:
     st.write("✅ Transparency detected and preserved.")
-        
         # Display original dimensions
-        height, width = original_image.shape[:2]
-        st.success(f"✓ Image loaded: {width}x{height}")
+    height, width = original_image.shape[:2]
+    st.success(f"✓ Image loaded: {width}x{height}")
         
         # Target width input
-        st.subheader("Target Width")
-        target_width = st.number_input(
-            "Width (pixels)",
-            min_value=1,
-            max_value=3840,
-            value=min(width * 2, 3840),
-            step=100,
-            help="Maximum width is 3840 pixels (4K resolution)"
+    st.subheader("Target Width")
+    target_width = st.number_input(
+        "Width (pixels)",
+        min_value=1,
+        max_value=3840,
+        value=min(width * 2, 3840),
+        step=100,
+        help="Maximum width is 3840 pixels (4K resolution)"
         )
         
         # Calculate target height
