@@ -257,9 +257,9 @@ if img.shape[2] == 4:
         )
         
         # Calculate target height
-        aspect_ratio = height / width
-        target_height = int(target_width * aspect_ratio)
-        st.info(f"Target size: {target_width}x{target_height}")
+    aspect_ratio = height / width
+    target_height = int(target_width * aspect_ratio)
+    st.info(f"Target size: {target_width}x{target_height}")
         
         st.markdown("---")
         st.subheader("Model Selection")
