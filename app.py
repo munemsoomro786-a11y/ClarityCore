@@ -246,7 +246,7 @@ if uploaded_file is not None:
     height, width = original_image.shape[:2]
         
         # Target width input
-        st.subheader("Target Width")
+    st.subheader("Target Width")
         target_width = st.number_input(
             "Width (pixels)",
             min_value=1,
