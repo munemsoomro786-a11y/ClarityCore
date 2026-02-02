@@ -261,13 +261,13 @@ if img.shape[2] == 4:
     target_height = int(target_width * aspect_ratio)
     st.info(f"Target size: {target_width}x{target_height}")
         
-        st.markdown("---")
-        st.subheader("Model Selection")
-        model_choice = st.selectbox(
-            "Upscaling Model",
-            ["FSRCNN (Fast)", "EDSR (High Quality)"],
-            index=0,
-            help="FSRCNN is much faster but slightly lower quality. EDSR provides best quality but is slower."
+    st.markdown("---")
+    st.subheader("Model Selection")
+    model_choice = st.selectbox(
+        "Upscaling Model",
+        ["FSRCNN (Fast)", "EDSR (High Quality)"],
+        index=0,
+        help="FSRCNN is much faster but slightly lower quality. EDSR provides best quality but is slower."
         )
         
         # Process button
