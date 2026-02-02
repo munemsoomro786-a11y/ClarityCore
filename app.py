@@ -234,16 +234,16 @@ with st.sidebar:
         type=['png', 'jpg', 'jpeg'],
         help="Upload an image to upscale"
     )
+if uploaded_file is not None:
+    # Everything below must have at least 4 spaces to stay "inside" this block
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    original_image = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
     
-    if uploaded_file is not None:
-        # FIXED: Use IMREAD_UNCHANGED to prevent black background
-        file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-        original_image = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
-        st.session_state.original_image = original_image
+    if original_image.shape[2] == 4:
+        st.write("✅ Transparency detected")
         
-        # Display original dimensions
-        height, width = original_image.shape[:2]
-        st.success(f"✓ Image loaded: {width}x{height}")
+    # Line 244: Now this will work because it's inside the 'if' block!
+    height, width = original_image.shape[:2]
         
         # Target width input
         st.subheader("Target Width")
