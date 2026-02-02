@@ -9,7 +9,7 @@ import requests
 
 # Page configuration
 st.set_page_config(
-    page_title="Image Upscaler",
+    page_title="ClarityCore | AI Image Upscaler",
     page_icon="🖼️",
     layout="wide"
 )
@@ -221,6 +221,19 @@ def image_to_bytes(image, format='PNG'):
         return encoded.tobytes()
     return None
 
+# Inject Meta Data for Website Preview (Open Graph)
+st.markdown(
+    """
+    <head>
+    <meta property="og:title" content="ClarityCore | AI Image Upscaler" />
+    <meta property="og:description" content="Transform blurry photos into crystal clear 4K masterpieces using AI Super-Resolution." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/munemsoomro786-a11y/ClarityCore/main/preview.png" />
+    <meta property="og:url" content="https://claritycore.streamlit.app" />
+    </head>
+    """,
+    unsafe_allow_html=True
+)
+
 # Main UI
 st.title("🖼️ Image Upscaler")
 st.markdown("Upload an image and upscale it to your desired width using AI super-resolution")
@@ -237,16 +250,13 @@ with st.sidebar:
     )
     
     if uploaded_file is not None:
-        # FIXED: Use IMREAD_UNCHANGED to prevent black background
         file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
         original_image = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
         st.session_state.original_image = original_image
         
-        # Display original dimensions (FIXED: Indented to be inside the "if uploaded_file" block)
         height, width = original_image.shape[:2]
         st.success(f"✓ Image loaded: {width}x{height}")
         
-        # Target width input
         st.subheader("Target Width")
         target_width = st.number_input(
             "Width (pixels)",
@@ -257,7 +267,6 @@ with st.sidebar:
             help="Maximum width is 3840 pixels (4K resolution)"
         )
         
-        # Calculate target height
         aspect_ratio = height / width
         target_height = int(target_width * aspect_ratio)
         st.info(f"Target size: {target_width}x{target_height}")
@@ -271,10 +280,8 @@ with st.sidebar:
             help="FSRCNN is much faster but slightly lower quality. EDSR provides best quality but is slower."
         )
         
-        # Process button
         if st.button("🚀 Upscale Image", type="primary", use_container_width=True):
             start_time = time.time()
-            
             with st.spinner("Processing..."):
                 processed_image = upscale_image(original_image, target_width, model_choice)
                 st.session_state.processed_image = processed_image
@@ -290,7 +297,6 @@ col1, col2 = st.columns(2)
 with col1:
     st.subheader("Original Image")
     if st.session_state.original_image is not None:
-        # Use appropriate conversion based on channel count
         img = st.session_state.original_image
         if img.shape[2] == 4:
             rgb_image = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)
@@ -303,7 +309,6 @@ with col1:
 with col2:
     st.subheader("Upscaled Image")
     if st.session_state.processed_image is not None:
-        # Use appropriate conversion for processed image
         img_p = st.session_state.processed_image
         if img_p.shape[2] == 4:
             rgb_processed = cv2.cvtColor(img_p, cv2.COLOR_BGRA2RGBA)
@@ -311,9 +316,7 @@ with col2:
             rgb_processed = cv2.cvtColor(img_p, cv2.COLOR_BGR2RGB)
         st.image(rgb_processed, use_container_width=True)
         
-        # Download buttons
         st.markdown("### 📥 Download")
-        
         col_jpg, col_png = st.columns(2)
         
         with col_jpg:
