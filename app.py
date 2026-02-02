@@ -232,9 +232,7 @@ with st.sidebar:
     )
     
     if uploaded_file is not None:
-        # Load image
-        # Use IMREAD_UNCHANGED to keep the transparency layer (Alpha channel)
-file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8) # ✅ FIXED: 4 spaces added
 img = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
 
 # Check if the image has transparency (4 channels)
