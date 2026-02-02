@@ -271,15 +271,15 @@ if img.shape[2] == 4:
         )
         
         # Process button
-        if st.button("🚀 Upscale Image", type="primary", use_container_width=True):
-            start_time = time.time()
+    if st.button("🚀 Upscale Image", type="primary", use_container_width=True):
+        start_time = time.time()
             
-            with st.spinner("Processing..."):
-                processed_image = upscale_image(original_image, target_width, model_choice)
-                st.session_state.processed_image = processed_image
+        with st.spinner("Processing..."):
+            processed_image = upscale_image(original_image, target_width, model_choice)
+            st.session_state.processed_image = processed_image
             
-            processing_time = time.time() - start_time
-            st.success(f"✓ Completed in {processing_time:.2f} seconds")
+        processing_time = time.time() - start_time
+        st.success(f"✓ Completed in {processing_time:.2f} seconds")
     else:
         st.info("👆 Upload an image to get started")
 
