@@ -233,9 +233,13 @@ with st.sidebar:
     
     if uploaded_file is not None:
         # Load image
-        file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-        original_image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
-        st.session_state.original_image = original_image
+        # Use IMREAD_UNCHANGED to keep the transparency layer (Alpha channel)
+file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+img = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
+
+# Check if the image has transparency (4 channels)
+if img.shape[2] == 4:
+    st.write("✅ Transparency detected and preserved.")
         
         # Display original dimensions
         height, width = original_image.shape[:2]
