@@ -237,9 +237,9 @@ with st.sidebar:
         img = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
         # All following lines must also be indented the same amount
         img = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
-# Check if the image has transparency (4 channels)
-if img.shape[2] == 4:
-    st.write("✅ Transparency detected and preserved.")
+        # Check if the image has transparency (4 channels)
+        if img.shape[2] == 4:
+            st.write("✅ Transparency detected and preserved.")
         # Display original dimensions
     height, width = original_image.shape[:2]
     st.success(f"✓ Image loaded: {width}x{height}")
