@@ -232,8 +232,9 @@ with st.sidebar:
     )
     
     if uploaded_file is not None:
-    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8) # ✅ FIXED: 4 spaces added
-img = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8) ✅ FIXED
+    img = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
+    # Every line that should only happen IF a file is uploaded must be aligned here
 
 # Check if the image has transparency (4 channels)
 if img.shape[2] == 4:
