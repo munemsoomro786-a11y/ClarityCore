@@ -232,8 +232,9 @@ with st.sidebar:
     )
     
     if uploaded_file is not None:
-    # This line MUST be indented by 4 spaces
-    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+        # ✅ EXACTLY 4 SPACES OR 1 TAB
+        file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+        img = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
     
     # All following lines must also be indented the same amount
     img = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
