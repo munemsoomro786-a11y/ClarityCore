@@ -247,13 +247,13 @@ if uploaded_file is not None:
         
         # Target width input
     st.subheader("Target Width")
-        target_width = st.number_input(
-            "Width (pixels)",
-            min_value=1,
-            max_value=3840,
-            value=min(width * 2, 3840),
-            step=100,
-            help="Maximum width is 3840 pixels (4K resolution)"
+    target_width = st.number_input(
+        "Width (pixels)",
+        min_value=1,
+        max_value=3840,
+        value=min(width * 2, 3840),
+        step=100,
+        help="Maximum width is 3840 pixels (4K resolution)"
         )
         
         # Calculate target height
