@@ -24,7 +24,8 @@ def download_model(url, filename):
     """Download model file with progress tracking."""
     try:
         with st.spinner(f"Downloading model (approx 37MB)... this may take a minute"):
-            response = requests.get(url, stream=True)
+            # Use a timeout to prevent hanging
+            response = requests.get(url, stream=True, timeout=30)
             response.raise_for_status()
             with open(filename, 'wb') as f:
                 for chunk in response.iter_content(chunk_size=8192):
@@ -234,26 +235,26 @@ with st.sidebar:
         type=['png', 'jpg', 'jpeg'],
         help="Upload an image to upscale"
     )
-if uploaded_file is not None:
-    # Everything below must have at least 4 spaces to stay "inside" this block
-    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-    original_image = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
     
-    if original_image.shape[2] == 4:
-        st.write("✅ Transparency detected")
+    if uploaded_file is not None:
+        # FIXED: Use IMREAD_UNCHANGED to prevent black background
+        file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+        original_image = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
+        st.session_state.original_image = original_image
         
-    # Line 244: Now this will work because it's inside the 'if' block!
-    height, width = original_image.shape[:2]
+        # Display original dimensions (FIXED: Indented to be inside the "if uploaded_file" block)
+        height, width = original_image.shape[:2]
+        st.success(f"✓ Image loaded: {width}x{height}")
         
         # Target width input
-    st.subheader("Target Width")
-    target_width = st.number_input(
-        "Width (pixels)",
-        min_value=1,
-        max_value=3840,
-        value=min(width * 2, 3840),
-        step=100,
-        help="Maximum width is 3840 pixels (4K resolution)"
+        st.subheader("Target Width")
+        target_width = st.number_input(
+            "Width (pixels)",
+            min_value=1,
+            max_value=3840,
+            value=min(width * 2, 3840),
+            step=100,
+            help="Maximum width is 3840 pixels (4K resolution)"
         )
         
         # Calculate target height
