@@ -120,7 +120,7 @@ if file:
                     st.image(disp_res, use_container_width=True)
                     
                     st.download_button("Download PNG", to_bytes(res, 'PNG'), "ClarityCore.png", "image/png", use_container_width=True)
-                    st.download_button("Download JPG", to_bytes(res, 'JPG'), "claritycore_4k.jpg", "image/jpeg", use_container_width=True)
+                    st.download_button("Download JPG", to_bytes(res, 'JPG'), "claritycore.jpg", "image/jpeg", use_container_width=True)
                     
     except Exception as e:
         st.error(f"A temporary error occurred: {e}")
