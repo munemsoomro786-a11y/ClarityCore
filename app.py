@@ -10,7 +10,7 @@ components.html(
     <script>
         var meta = document.createElement('meta');
         meta.name = "google-site-verification";
-        meta.content="hPP59Rl7Sok5J4vVLS6lh_aKUsXdp2w1DH8r0VtmorQ" />";
+        meta.content="hPP59Rl7Sok5J4vVLS6lh_aKUsXdp2w1DH8r0VtmorQ";
         document.getElementsByTagName('head')[0].appendChild(meta);
     </script>
     """,
