@@ -19,6 +19,17 @@ components.html(
 import cv2
 import numpy as np
 import os
+
+# The name of the file Google gave you
+FILE_NAME = "googlefdb548e1a93d50a6.html" 
+
+# The content inside that file (usually just 'google-site-verification: google123456789.html')
+FILE_CONTENT = "google-site-verification: googlefdb548e1a93d50a6.html"
+
+# This creates the file in the root directory during deployment
+if not os.path.exists(FILE_NAME):
+    with open(FILE_NAME, "w") as f:
+        f.write(FILE_CONTENT)
 import requests
 import threading
 import time
