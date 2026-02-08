@@ -1,16 +1,20 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
-# This should be at the very top of your app.py
-st.set_page_config(page_title="ClarityCore", page_icon="🖼️")
+# 1. This must be the first Streamlit command
+st.set_page_config(page_title="ClarityCore", page_icon="✨")
 
-# Inject the Google Verification tag
-st.markdown(
-    f"""
-    <head>
-        <meta name="google-site-verification" content="hPP59Rl7Sok5J4vVLS6lh_aKUsXdp2w1DH8r0VtmorQ" />
-    </head>
+# 2. Inject the verification tag into the app's frontend
+components.html(
+    """
+    <script>
+        var meta = document.createElement('meta');
+        meta.name = "google-site-verification";
+        meta.content="hPP59Rl7Sok5J4vVLS6lh_aKUsXdp2w1DH8r0VtmorQ" />";
+        document.getElementsByTagName('head')[0].appendChild(meta);
+    </script>
     """,
-    unsafe_allow_html=True
+    height=0,
 )
 import cv2
 import numpy as np
