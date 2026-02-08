@@ -1,4 +1,17 @@
 import streamlit as st
+
+# This should be at the very top of your app.py
+st.set_page_config(page_title="ClarityCore", page_icon="🖼️")
+
+# Inject the Google Verification tag
+st.markdown(
+    f"""
+    <head>
+        <meta name="google-site-verification" content="hPP59Rl7Sok5J4vVLS6lh_aKUsXdp2w1DH8r0VtmorQ" />
+    </head>
+    """,
+    unsafe_allow_html=True
+)
 import cv2
 import numpy as np
 import os
